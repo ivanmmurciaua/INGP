@@ -1,0 +1,68 @@
+<Schema name="New Schema2">
+  <Dimension type="StandardDimension" visible="true" name="carrera">
+    <Hierarchy name="carrera" visible="true" hasAll="true">
+      <Table name="carrera" alias="">
+      </Table>
+      <Level name="nombre" visible="true" table="carrera" column="nombre" nameColumn="nombre" uniqueMembers="false">
+      </Level>
+      <Level name="ciudad" visible="true" table="carrera" column="ciudad" nameColumn="ciudad" uniqueMembers="false">
+      </Level>
+      <Level name="pais" visible="true" table="carrera" column="pais" nameColumn="pais" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="nacionalidad">
+    <Hierarchy name="nacionalidad" visible="true" hasAll="true">
+      <Table name="nacionalidad" alias="">
+      </Table>
+      <Level name="nombre" visible="true" table="nacionalidad" column="nombre" nameColumn="nombre" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="fecha">
+    <Hierarchy name="fecha" visible="true" hasAll="true">
+      <Table name="fecha" alias="">
+      </Table>
+      <Level name="dia" visible="true" table="fecha" column="dia" nameColumn="dia" uniqueMembers="false">
+      </Level>
+      <Level name="mes" visible="true" table="fecha" column="mes" nameColumn="mes" uniqueMembers="false">
+      </Level>
+      <Level name="anyo" visible="true" table="fecha" column="anyo" nameColumn="anyo" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="piloto">
+    <Hierarchy name="piloto" visible="true" hasAll="true">
+      <Table name="piloto" alias="">
+      </Table>
+      <Level name="nombre" visible="true" table="piloto" column="nombre" nameColumn="nombre" uniqueMembers="false">
+      </Level>
+      <Level name="apelllido" visible="true" table="piloto" column="apellido" nameColumn="apellido" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="rendimiento" visible="true" cache="true" enabled="true">
+    <Table name="rendimiento del piloto" alias="">
+    </Table>
+    <DimensionUsage source="carrera" name="fk_carrera" visible="true" foreignKey="Carrera_idCarrera">
+    </DimensionUsage>
+    <DimensionUsage source="nacionalidad" name="fk_nacionalidad" visible="true" foreignKey="Nacionalidad_idNacionalidad">
+    </DimensionUsage>
+    <DimensionUsage source="fecha" name="fk_fecha" visible="true" foreignKey="Fecha_idFecha">
+    </DimensionUsage>
+    <DimensionUsage source="piloto" name="fk_piloto" visible="true" foreignKey="Piloto_idPiloto">
+    </DimensionUsage>
+    <Measure name="tiempo_medio_x_vuelta" column="Tiempo_medio_x_vuelta" datatype="Numeric" aggregator="avg" visible="true">
+    </Measure>
+    <Measure name="posicion_pitlane" column="Posicion_pit-lane" datatype="Numeric" aggregator="count" visible="true">
+    </Measure>
+    <Measure name="numero_vueltas_ganadas" column="Numero_vueltas_ganadas" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numero_puntos_ganados" column="Numero_puntos_ganados" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numero_paradas_hechas" column="Numero_paradas_hechas" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="tiempo_total_paradas" column="Tiempo_total_paradas" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

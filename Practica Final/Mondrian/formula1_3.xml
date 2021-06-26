@@ -1,0 +1,74 @@
+<Schema name="New Schema2">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="carrera">
+    <Hierarchy name="carrera" visible="true" hasAll="true">
+      <Table name="carrera">
+      </Table>
+      <Level name="nombre" visible="true" table="carrera" column="nombre" nameColumn="nombre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ciudad" visible="true" table="carrera" column="ciudad" nameColumn="ciudad" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="pais" visible="true" table="carrera" column="pais" nameColumn="pais" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="anyo" visible="true" table="carrera" column="anyo" nameColumn="anyo" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="nacionalidad">
+    <Hierarchy name="nacionalidad" visible="true" hasAll="true">
+      <Table name="nacionalidad">
+      </Table>
+      <Level name="nombre" visible="true" table="nacionalidad" column="nombre" nameColumn="nombre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="fecha">
+    <Hierarchy name="fecha" visible="true" hasAll="true">
+      <Table name="fecha">
+      </Table>
+      <Level name="dia" visible="true" table="fecha" column="dia" nameColumn="dia" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="mes" visible="true" table="fecha" column="mes" nameColumn="mes" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="anyo" visible="true" table="fecha" column="anyo" nameColumn="anyo" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="piloto">
+    <Hierarchy name="nombre" visible="true" hasAll="true">
+      <Table name="piloto">
+      </Table>
+      <Level name="nombre" visible="true" table="piloto" column="nombre" nameColumn="nombre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="apellido" visible="true" hasAll="true">
+      <Table name="piloto" alias="">
+      </Table>
+      <Level name="apellido" visible="true" table="piloto" column="apellido" nameColumn="apellido" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="rendimiento" visible="true" cache="true" enabled="true">
+    <Table name="rendimiento del piloto">
+    </Table>
+    <DimensionUsage source="carrera" name="fk_carrera" visible="true" foreignKey="Carrera_idCarrera" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="nacionalidad" name="fk_nacionalidad" visible="true" foreignKey="Nacionalidad_idNacionalidad" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="fecha" name="fk_fecha" visible="true" foreignKey="Fecha_idFecha" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="piloto" name="fk_piloto" visible="true" foreignKey="Piloto_idPiloto" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="tiempo_medio_x_vuelta" column="Tiempo_medio_x_vuelta" datatype="Numeric" aggregator="avg" visible="true">
+    </Measure>
+    <Measure name="posicion_pitlane" column="Posicion_pit-lane" datatype="Numeric" aggregator="count" visible="true">
+    </Measure>
+    <Measure name="numero_vueltas_ganadas" column="Numero_vueltas_ganadas" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numero_puntos_ganados" column="Numero_puntos_ganados" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numero_paradas_hechas" column="Numero_paradas_hechas" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="tiempo_total_paradas" column="Tiempo_total_paradas" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
